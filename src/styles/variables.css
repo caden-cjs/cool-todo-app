@@ -1,0 +1,44 @@
+:root {
+  /* Light theme (default) */
+  --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-input: #f8f9fa;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+  --border-color: #e9ecef;
+  --accent-color: #667eea;
+  --accent-hover: #5a6fd6;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --shadow-color: rgba(102, 126, 234, 0.25);
+  --todo-bg: #ffffff;
+  --todo-hover: #f8f9fa;
+  --completed-text: #6c757d;
+  --filter-active-bg: #667eea;
+  --filter-active-text: #ffffff;
+  --filter-inactive-bg: #e9ecef;
+  --filter-inactive-text: #6c757d;
+}
+
+[data-theme="dark"] {
+  --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --bg-card: rgba(30, 30, 46, 0.95);
+  --bg-input: #2d2d44;
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border-color: #3f3f5a;
+  --accent-color: #818cf8;
+  --accent-hover: #6366f1;
+  --success-color: #22c55e;
+  --danger-color: #ef4444;
+  --shadow-color: rgba(129, 140, 248, 0.15);
+  --todo-bg: #252538;
+  --todo-hover: #2d2d44;
+  --completed-text: #71717a;
+  --filter-active-bg: #818cf8;
+  --filter-active-text: #1a1a2e;
+  --filter-inactive-bg: #3f3f5a;
+  --filter-inactive-text: #a1a1aa;
+}
