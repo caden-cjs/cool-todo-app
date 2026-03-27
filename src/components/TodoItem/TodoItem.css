@@ -1,35 +1,64 @@
 .todo-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
+  gap: 14px;
+  padding: 18px 22px;
   background: var(--todo-bg);
-  border-radius: 12px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 8px var(--shadow-color);
-  transition: all 0.3s ease;
-  animation: slideIn 0.3s ease;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: todoSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
 }
 
-@keyframes slideIn {
+/* Left border indicator */
+.todo-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--border-color);
+  transition: background 0.3s ease;
+  border-radius: 4px 0 0 4px;
+}
+
+.todo-item:hover::before {
+  background: var(--accent-color);
+}
+
+@keyframes todoSlideIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateX(-20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
 .todo-item:hover {
   background: var(--todo-hover);
   transform: translateX(4px);
-  box-shadow: 0 4px 16px var(--shadow-color);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: var(--border-color);
 }
 
 .todo-item.completed {
-  opacity: 0.7;
+  opacity: 0.65;
+}
+
+.todo-item.completed::before {
+  background: var(--success-color);
 }
 
 .todo-item.completed .todo-text {
@@ -40,64 +69,89 @@
 .todo-item.editing {
   background: var(--bg-input);
   box-shadow: 0 0 0 2px var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 .checkbox {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  border: 2px solid var(--border-color);
+  border: 2.5px solid var(--border-color);
   background: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
+  position: relative;
 }
 
 .checkbox:hover {
   border-color: var(--accent-color);
-  transform: scale(1.1);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px var(--shadow-color);
 }
 
 .checkbox.checked {
-  background: var(--success-color);
-  border-color: var(--success-color);
+  background: var(--success-gradient);
+  border-color: transparent;
+  animation: checkBounce 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes checkBounce {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 .checkbox svg {
   width: 14px;
   height: 14px;
   color: white;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.2s ease;
+}
+
+.checkbox.checked svg {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .todo-text {
   flex: 1;
   font-size: 16px;
+  font-weight: 450;
   color: var(--text-primary);
   cursor: pointer;
   word-break: break-word;
   transition: color 0.3s ease;
+  line-height: 1.5;
+}
+
+.todo-text:hover {
+  color: var(--accent-color);
 }
 
 .edit-input {
   flex: 1;
   font-size: 16px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border: none;
   background: var(--todo-bg);
   color: var(--text-primary);
-  border-radius: 8px;
+  border-radius: 10px;
   outline: none;
   font-family: inherit;
+  font-weight: 450;
 }
 
 .todo-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .todo-item:hover .todo-actions {
@@ -105,16 +159,16 @@
 }
 
 .action-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   border: none;
   background: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .action-btn svg {
@@ -123,28 +177,32 @@
 }
 
 .edit-btn {
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .edit-btn:hover {
-  background: var(--accent-color);
+  background: var(--accent-gradient);
   color: white;
+  transform: scale(1.1);
 }
 
 .delete-btn {
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .delete-btn:hover {
-  background: var(--danger-color);
+  background: var(--danger-gradient);
   color: white;
+  transform: scale(1.1);
 }
 
 /* Mobile responsive */
 @media (max-width: 480px) {
   .todo-item {
-    padding: 12px 16px;
-    gap: 10px;
+    padding: 14px 18px;
+    gap: 12px;
+    border-radius: 14px;
+    margin-bottom: 10px;
   }
 
   .todo-actions {
@@ -152,8 +210,9 @@
   }
 
   .action-btn {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
   }
 
   .action-btn svg {
@@ -162,6 +221,11 @@
   }
 
   .todo-text {
-    font-size: 14px;
+    font-size: 15px;
+  }
+
+  .checkbox {
+    width: 24px;
+    height: 24px;
   }
 }
